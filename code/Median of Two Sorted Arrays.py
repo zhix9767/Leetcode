@@ -33,8 +33,4 @@ class Solution(object):
                         right = nums1[loc1]
                     else:
                         right = min(nums1[loc1],nums2[loc2])
-                    return (left+right)/2
-
-
-
-
+                    return (left+right)/2.0
