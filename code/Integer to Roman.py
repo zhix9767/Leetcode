@@ -11,7 +11,3 @@ class Solution(object):
 
         result = case4[num//1000]+case3[(num%1000)//100]+case2[(num%100)//10]+case1[num%10]
         return result
-
-test = Solution()
-num = 89
-print(test.intToRoman(num))
