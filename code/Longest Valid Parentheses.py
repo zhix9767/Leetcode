@@ -62,8 +62,4 @@ class Solution(object):
                 elif left > right:
                     left, right = 0, 0
         return maxLength
-
-test = Solution()
-s = "()(()))"
-print(test.longestValidParentheses3(s))
                     
