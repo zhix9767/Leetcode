@@ -18,3 +18,4 @@ class Solution(object):
                     count = 1
             result = temp + str(count) + prev
         return result
+        
