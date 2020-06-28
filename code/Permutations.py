@@ -16,7 +16,3 @@ class Solution(object):
             nums[i], nums[j] = nums[j], nums[i]
             self.permute2(nums, i+1, result)
             nums[i], nums[j] = nums[j], nums[i]
-
-test = Solution()
-nums = [1,2,3]
-print(test.permute(nums))
