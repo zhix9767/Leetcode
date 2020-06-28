@@ -59,19 +59,22 @@ class Solution(object):
         p_cut = p.split('*')
         location = 0
         for i in range(len(p_cut)):
-            if i == 0:
-                if self.strStr(s[location:len(s)], p_cut[i]) != 0:
-                    return False
-                location = len(p_cut[i])
-            elif i == len(p_cut) - 1:
-                if location > len(s)-len(p_cut[i]) or \
-                    self.strStr(s[len(s)-len(p_cut[i]):len(s)], p_cut[i]) != 0:
-                    return False
-            else:
-                temp = self.strStr(s[location:len(s)], p_cut[i])
-                if temp == -1:
-                    return False
-                location += len(p_cut[i]) + temp
+            p_cut2 = p_cut[i].split("?")
+            for j in range(len(p_cut2)):
+                if i == 0 and j == 0:
+                    if self.strStr(s[location:len(s)], p_cut2[j]) != 0:
+                        return False
+                    location = len(p_cut2[j]) + 1
+                elif i == len(p_cut) - 1 and j == len(p_cut2) - 1:
+                    if location > len(s)-len(p_cut2[j]) or \
+                        self.strStr(s[len(s)-len(p_cut2[j]):len(s)], p_cut2[j]) != 0:
+                        return False
+                else:
+                    temp = self.strStr(s[location:len(s)], p_cut2[j])
+                    if temp == -1:
+                        return False
+                    location += len(p_cut2[j]) + temp + 1
+            location -= 1
         if len(p_cut) == 1 and len(s) != len(p):
             return False
         return True
@@ -88,23 +91,23 @@ class Solution(object):
         pmt[0] = 0
         maxLength = 0
         for i in range(1, len(needle)):
-            while maxLength > 0 and needle[i] != needle[maxLength] and needle[i] != '?':
+            while maxLength > 0 and needle[i] != needle[maxLength]:
                 maxLength = pmt[maxLength-1]
-            if needle[i] == needle[maxLength] or needle[i] == '?':
+            if needle[i] == needle[maxLength]:
                 maxLength += 1
             pmt[i] = maxLength
 
         count = 0
         for i in range(len(haystack)):
-            while count > 0 and haystack[i] != needle[count] and needle[count] != '?':
+            while count > 0 and haystack[i] != needle[count]:
                 count = pmt[count-1]
-            if haystack[i] == needle[count] or needle[count] == '?':
+            if haystack[i] == needle[count]:
                 count += 1
             if count == len(needle):
                 return i - len(needle) + 1
         return -1
 
 test = Solution()
-s = "zacabz"
-p = "a?b"
-print(test.strStr(s,p))
+s = "accab"
+p = "c?b"
+print(test.isMatch3(s,p))
